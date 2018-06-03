@@ -1,0 +1,59 @@
+## 基础配置: 
+server: 
+  context-path: /es-learning
+  port: 8001
+  tomcat: 
+    uri-encoding: UTF-8
+
+## Spring配置:
+spring: 
+  http: 
+    encoding:
+      charset: UTF-8 
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    default-property-inclusion: NON_NULL
+  #数据源配置
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/movie?autoReconnect=true&zeroDateTimeBehavior=convertToNull&useUnicode=true
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    initialSize: 5
+    minIdle: 1
+    #maxIdle: 10
+    maxActive: 100
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxPoolPreparedStatementPerConnectionSize: 20
+    filters: stat,wall,log4j
+    useGlobalDataSourceStat: true
+    
+mybatis:
+    type-aliases-package: com.xzh.entity
+    mapper-locations: classpath:com/xzh/mapping/*.xml
+
+logging:
+    level:
+        tk.mybatis: TRACE
+
+#mapper: 
+#    mappers:
+#        - com.x.xxx.BaseMapper
+#    not-empty: false
+#    identity: MYSQL
+        
+pagehelper: 
+    helperDialect: mysql
+    reasonable: true
+    supportMethodsArguments: true
+    params: count=countSql   
+ 
